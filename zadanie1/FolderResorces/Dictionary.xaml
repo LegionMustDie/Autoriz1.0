@@ -1,0 +1,54 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <SolidColorBrush x:Key="MainColor" Color="Black"/>
+    <SolidColorBrush x:Key="White" Color="White"/>
+
+    <Style TargetType="Label">
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="FontSize" Value="35"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    </Style>
+    <Style TargetType="Image">
+        <Setter Property="Source" Value="/FolderResorces/Image/logomain.png"/>
+    </Style>
+    <Style x:Key="LabelTypeOne" TargetType="Label">
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="FontSize" Value="25"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Right"/>
+        <Setter Property="Margin" Value="10"/>
+    </Style>
+    <Style TargetType="TextBox">
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="10 20 50 20"/>
+        <Setter Property="BorderBrush" Value="{StaticResource MainColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource MainColor}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Padding" Value="10"/>
+    </Style>
+    <Style TargetType="PasswordBox">
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="Margin" Value="10 20 50 20"/>
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="Padding" Value="10"/>
+        <Setter Property="PasswordChar" Value="*"/>
+    </Style>
+    <Style TargetType="Button">
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="20"/>
+        <Setter Property="BorderBrush" Value="{StaticResource MainColor}"/>
+        <Setter Property="Background" Value="{StaticResource MainColor}"/>
+        <Setter Property="Foreground" Value="{StaticResource White}"/>
+    </Style>
+</ResourceDictionary>
