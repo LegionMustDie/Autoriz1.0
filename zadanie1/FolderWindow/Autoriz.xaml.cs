@@ -24,9 +24,9 @@ namespace zadanie1.FolderWindow
     /// </summary>
     public partial class Autoriz : Window
     {
-        private int WrongCounts = 0;
+        private int wrongCounts = 0;
         private int sum = 15000;
-        private int ExtraTime = 20000;
+        private int extraTime = 20000;
         public Autoriz()
         {
             InitializeComponent();
@@ -53,16 +53,16 @@ namespace zadanie1.FolderWindow
                     var user = DBEntities.GetContext().User
                      .FirstOrDefault(u => u.LoginUser == tb.Text && u.PasswordUser == pb.Password);
 
-                    if (WrongCounts > 3)
+                    if (wrongCounts > 3)
                     {
-                        sum += ExtraTime;
+                        sum += extraTime;
                         BlockSystem();
                         return;
                     }
 
-                    if (WrongCounts == 3)
+                    if (wrongCounts == 3)
                     {
-                        WrongCounts++;
+                        wrongCounts++;
                         BlockSystem();
                         return;
                     }
@@ -71,7 +71,7 @@ namespace zadanie1.FolderWindow
                     {
                         ClassMB.ErrorMessageBox("Вы ввели неверный логин или пароль. " +
                             "Пожалуйста проверьте ещё раз введенные данные");
-                        WrongCounts++;
+                        wrongCounts++;
                         tb.Focus();
                         return;
                     }

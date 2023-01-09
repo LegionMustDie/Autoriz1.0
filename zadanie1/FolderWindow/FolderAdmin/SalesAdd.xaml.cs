@@ -50,6 +50,10 @@ namespace zadanie1.FolderWindow.FolderAdmin
                     ClassMB.ErrorMessageBox("Не все поля заполнены");
                 }
             }
+            else
+            {
+                ClassMB.ErrorMessageBox("Не все поля заполнены");
+            }
 
         }
         private bool CheckInputs(params TextBox[] inputs)
