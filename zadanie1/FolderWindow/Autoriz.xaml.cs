@@ -24,9 +24,9 @@ namespace zadanie1.FolderWindow
     /// </summary>
     public partial class Autoriz : Window
     {
-        int WrongCounts = 0;
-        int block = 15000;
-        int time = 20000;
+        private int WrongCounts = 0;
+        private int sum = 15000;
+        private int ExtraTime = 20000;
         public Autoriz()
         {
             InitializeComponent();
@@ -55,24 +55,17 @@ namespace zadanie1.FolderWindow
 
                     if (WrongCounts > 3)
                     {
-                        int sum = block;
-                        sum += time;
-                        ClassMB.ErrorMessageBox("Система заблокирована на дополнительное время!");
-                        Thread.Sleep(sum);
-                        ClassMB.InfoMessageBox("Система разрблокирована, но в случае новой ошибки будет вновь заблокирована!");
+                        sum += ExtraTime;
+                        BlockSystem();
                         return;
                     }
 
                     if (WrongCounts == 3)
                     {
                         WrongCounts++;
-                        ClassMB.ErrorMessageBox("Система заблокирована на 15 секунд!");
-                        Thread.Sleep(block);
-                        ClassMB.InfoMessageBox("Система разрблокирована, но в случае новой ошибки будет вновь заблокирована!");
+                        BlockSystem();
                         return;
                     }
-
-                    
 
                     if (user == null)
                     {
@@ -82,6 +75,12 @@ namespace zadanie1.FolderWindow
                         tb.Focus();
                         return;
                     }
+                    else
+                    {
+                        SetActiveDate(user);
+                    }
+                    
+
 
                     if (user.PasswordUser != pb.Password)
                     {
@@ -92,35 +91,6 @@ namespace zadanie1.FolderWindow
                     }
 
                    
-
-                    else
-                    {
-                        for (int i = 0; i < user.LoginUser.Length; i++)
-                        {
-                            if (user.LoginUser[i] != tb.Text[i])
-                            {
-                                ClassMB.ErrorMessageBox("Вы ввели неверный логин или пароль. " +
-                                "Пожалуйста проверьте ещё раз введенные данные");
-                                tb.Focus();
-                                break;
-                            }
-                        }
-                    }
-
-                    DateTime d1 = DateTime.Now;
-                    DateTime d2 = Convert.ToDateTime(user.ActiveDate);
-                    TimeSpan d = d1 - d2;
-                    if (Convert.ToInt32(d.ToString("dd")) > 30)
-                    {
-                        user.Active = 0;
-                        DBEntities.GetContext().SaveChanges();
-                    }
-
-                    if (user.Active == 0)
-                    {
-                        ClassMB.ErrorMessageBox("Ваша учетная запись отключена за неактивность.");
-                        return;
-                    }
                    
                     switch (user.IdRole)
                     {
@@ -141,6 +111,30 @@ namespace zadanie1.FolderWindow
                     ClassMB.ErrorMessageBox(ex);
                 }
             }
+        }
+        private void SetActiveDate(User user)
+        {
+            DateTime d1 = DateTime.Now;
+            DateTime d2 = Convert.ToDateTime(user.ActiveDate);
+            TimeSpan d = d1 - d2;
+            if (Convert.ToInt32(d.ToString("dd")) > 30)
+            {
+                user.Active = 0;
+                DBEntities.GetContext().SaveChanges();
+            }
+
+            if (user.Active == 0)
+            {
+                ClassMB.ErrorMessageBox("Ваша учетная запись отключена за неактивность.");
+                return;
+            }
+        }
+
+        private void BlockSystem()
+        {
+            ClassMB.ErrorMessageBox($"Система заблокирована на {sum/1000} секунд!") ;
+            Thread.Sleep(sum);
+            ClassMB.InfoMessageBox("Система разрблокирована, но в случае новой ошибки будет вновь заблокирована!");
         }
     }
 }

@@ -28,15 +28,11 @@ namespace zadanie1.FolderWindow.FolderAdmin
 
         private void delete_Click(object sender, RoutedEventArgs e)
         {
-            SalesPerson salesPerson = dgList.SelectedItem as SalesPerson;
-            if (salesPerson != null)
+            if (dgList.SelectedItem is SalesPerson salesPerson)
             {
                 if (ClassMB.QuestionMessageBox("Вы уверены, что хотите это удалить?"))
                 {
-                    DBEntities.GetContext().SalesPerson.Remove(salesPerson);
-                    DBEntities.GetContext().SaveChanges();
-                    ClassMB.InfoMessageBox("Удаление выполнено");
-                    dgList.ItemsSource = DBEntities.GetContext().SalesPerson.ToList() ;
+                   DeleteItem(salesPerson);
                 }
             }
         }
@@ -48,11 +44,17 @@ namespace zadanie1.FolderWindow.FolderAdmin
 
         private void dgList_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            SalesPerson salesPerson = dgList.SelectedItem as SalesPerson;
-            if (salesPerson != null)
+            if (dgList.SelectedItem is SalesPerson salesPerson)
             {
-                new FolderAdmin.SalesEdit(salesPerson).Show();
+                new SalesEdit(salesPerson).Show();
             }
+        }
+        private void DeleteItem(SalesPerson sales)
+        {
+            DBEntities.GetContext().SalesPerson.Remove(sales);
+            DBEntities.GetContext().SaveChanges();
+            ClassMB.InfoMessageBox("Удаление выполнено");
+            dgList.ItemsSource = DBEntities.GetContext().SalesPerson.ToList();
         }
     }
 }

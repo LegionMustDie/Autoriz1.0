@@ -28,17 +28,8 @@ namespace zadanie1.FolderWindow.FolderAdmin
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            if (string.IsNullOrEmpty(tbName.Text))
-                ClassMB.ErrorMessageBox("Вы не ввели имя");
-            if (string.IsNullOrEmpty(tbSurname.Text))
-                ClassMB.ErrorMessageBox("Вы не ввели фамилию");
-            if (string.IsNullOrEmpty(tbPatron.Text))
-                ClassMB.ErrorMessageBox("Вы не ввели отчество");
-            if (string.IsNullOrEmpty(tbEmail.Text))
-                ClassMB.ErrorMessageBox("Вы не ввели почту");
-            if (string.IsNullOrEmpty(tbPhone.Text))
-                ClassMB.ErrorMessageBox("Вы не ввели номер телефона");
-            else
+            
+            if (CheckInputs(tbName, tbSurname, tbPhone, tbEmail))
             {
                 try
                 {
@@ -56,10 +47,22 @@ namespace zadanie1.FolderWindow.FolderAdmin
                 }
                 catch
                 {
-                    ClassMB.ErrorMessageBox("Произошла ошибка");
+                    ClassMB.ErrorMessageBox("Не все поля заполнены");
                 }
             }
 
+        }
+        private bool CheckInputs(params TextBox[] inputs)
+        {
+            foreach (TextBox textBox in inputs)
+            {
+                if(string.IsNullOrEmpty(textBox.Text))
+                {
+                    textBox.Focus();
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

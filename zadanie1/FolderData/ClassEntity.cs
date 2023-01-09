@@ -12,9 +12,7 @@ namespace zadanie1.FolderData
         private static DBEntities context;
         public static DBEntities GetContext()
         {
-            if (context == null)
-                context = new DBEntities();
-            return context;
+            return context ?? (context = new DBEntities());
         }
     }
 }
